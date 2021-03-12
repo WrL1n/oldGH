@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jtest</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <hr>
+    <div class="container-fluid">
+      <ul class="nav justify-content-center">
+
+        <% if user_signed_in? %>
+
+          <a class="nav-link text-dark" href="<%= root_path %>"><%= 'Home' %></a>
+
+          <% if user_admin? %>
+            <a class="nav-link text-dark" href="<%= menu_path %>"><%= t('header.menu') %></a>
+            <a class="nav-link text-dark" href="<%= organisations_path %>"><%= t('header.organisations') %></a>
+            <a class="nav-link text-dark" href="<%= users_path %>"><%= t('header.users') %></a>
+            <a class="nav-link text-dark" href="<%= products_path %>"><%= t('header.products') %></a>
+          <% end %>
+
+          <a class="nav-link text-success" href="<%= user_path(current_user.id) %>"><%= current_user.username %></a>
+          <a class="nav-link text-danger" href="<%= destroy_user_session_path %>" rel="nofollow" data-method="delete"><%= t('header.sign_out') %></a>
+        <% else %>
+          <a class="nav-link text-success" href="<%= new_user_session_path %>"><%= t('header.sign_in') %></a>
+          <a class="nav-link text-secondary" href="<%= new_user_registration_path %>"><%= t('header.sign_up') %></a>
+        <% end %>
+
+      </ul>
+    </div>  <!--/.container -->
+    <hr/>
+
+    <div class="container">
+      <% if notice && notice.length > 0 then %>
+        <div class="alert alert-success"><%= notice %></div>
+      <% end %>
+
+      <% if alert && alert.length > 0 then %>
+        <div class="alert alert-danger"><%= alert %></div>
+      <% end %>
+    </div>
+
+    <%= yield %>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<div class="container">
+  <h2><%= t('product.show.header') %></h2>
+  <%= simple_form_for @product do |f| %>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :title, label: t('product.show.title'), input_html: { disabled: "disabled" } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :price, label: t('product.show.price'), input_html: { disabled: "disabled" } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :description, label: t('product.show.description'), input_html: { disabled: "disabled" } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :position, label: t('product.show.position'), input_html: { disabled: "disabled" } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :in_menu, as: :select, collection: [true, false], label: t('product.new.in_menu'), input_html: { disabled: "disabled" } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= link_to(image_tag(@product.path_to_image.thumb.url, alt: 'Image', class: "rounded"), @product.path_to_image.url, target: '_blank') if @product.path_to_image? %>
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= link_to t('product.show.button_edit'), edit_product_path, class: "btn btn-info btn-lg btn-block", method: :get %>
+      </div>
+      <div class="col-md-4">
+        <%= link_to t('product.show.button_back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+      </div>
+    </div>
+  <% end %>
+</div>

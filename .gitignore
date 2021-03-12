@@ -1,0 +1,45 @@
+
+BarberShop/public/contacts.txt
+BarberShop/public/users.txt
+BarberShop/BarberShop.sqlite
+BarberShop/barbershop.db
+
+BarberShopHQ/barbershop.db
+
+FirstBlog/blog.db
+
+iDeliver/Report.html
+iDeliver/Report.txt
+
+# Lunches
+# ---------------------------------------------------------
+# Ignore bundler config.
+Lunches/.bundle
+
+# Ignore the default SQLite database.
+Lunches/db/*.sqlite3
+Lunches/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+Lunches/log/*
+Lunches/tmp/*
+Lunches!/log/.keep
+Lunches!/tmp/.keep
+
+# Ignore uploaded files in development
+Lunches/storage/*
+
+Lunches/node_modules
+Lunches/yarn-error.log
+
+Lunches/public/assets
+Lunches/.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+Lunches/config/master.key
+
+Lunches/.rubocop.yml
+Lunches/.rubocop_todo.yml
+Lunches/public/uploads
+# ---------------------------------------------------------
+

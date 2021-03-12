@@ -1,0 +1,30 @@
+<h2>Showusers</h2>
+
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Phone</th>
+      <th>Barber</th>
+      <th>Color</th>            
+    </tr>
+  </thead>
+
+  <% @results.each do |row| %>
+	<tbody>
+	  <tr>
+	    <th><%= row['id'] %></th>
+	    <td><%= row['user_name'] %></td>
+	    <td><%= row['user_date'] %></td>
+	    <td><%= row['user_phone'] %></td>
+	    <td><%= row['user_selection'] %></td>
+	    <td style= "background-color: <%= row['color'] %> "><%= row['color'] %></td>                  
+	  </tr>
+	</tbody>
+  <% end %>  
+
+    
+</table>

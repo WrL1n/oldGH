@@ -1,0 +1,63 @@
+<div class="container"><h2><%= t('registrations.sign_up') %></h2></div>
+
+<div class="container">
+  <%= simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f| %>
+    <div class="container">
+      <% if devise_error_messages! && devise_error_messages!.length > 0 then %>
+        <div class="alert alert-danger"><%= devise_error_messages! %></div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :username, label: t('registration.username'), autofocus: true, error: 'Username is mandatory, please specify one' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :email, label: t('registration.email'), placeholder: 'user@domain.com', autocomplete: "email" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.input :organisation_id, as: :select, collection: all_organisations, label: t('registration.organisation') %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :password, error_html: { id: 'password_error'}, label: t('registration.password'), hint: t('registration.chars_min'), autocomplete: "off" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :password_confirmation, label: t('registration.password_conf'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :first_name, label: t('registration.first_name'), autocomplete: "off" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :last_name, label: t('registration.last_name'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.input :about, label: t('registration.about'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="row">
+        <div class="col-md-8">
+      <%= f.button :submit, t('registration.button'), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

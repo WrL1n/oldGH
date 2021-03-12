@@ -1,0 +1,66 @@
+<div class="container">
+  <h2><%= @menu.title %></h2>
+
+  <h4 class="text-success"><%= t('menu.on_menu') %></h4>
+    <% if !@menu.products.empty? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t('table.id') %></th>
+            <th><%= t('table.in_menu?') %></th>
+            <th><%= t('table.title') %></th>
+            <th><%= t('table.position') %></th>
+            <th><%= t('table.price') %></th>
+            <th><%= t('table.created_at') %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @menu.products.order(position: :asc).each do |product| %>
+            <% if product.in_menu == true %>
+              <tr>
+                <td><%= product.id %></td>
+                <td><%= button_to t('button._true'), product_path(product, product: {in_menu: false}), controller: "products", action: "update", :method => :put, class: "btn btn-danger" %></td>
+                <td><%= link_to product.title, product_path(product.id) %></td>
+                <td><%= product.position %></td>
+                <td><%= product.price %></td>
+                <td><%= product.created_at %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+    <br/>
+    <br/>
+
+    <h4 class="text-danger"><%= t('menu.not_on_menu') %></h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t('table.id') %></th>
+            <th><%= t('table.in_menu?') %></th>
+            <th><%= t('table.title') %></th>
+            <th><%= t('table.position') %></th>
+            <th><%= t('table.price') %></th>
+            <th><%= t('table.created_at') %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @menu.products.order(position: :asc).each do |product| %>
+            <% if product.in_menu == false %>
+              <tr>
+                <td><%= product.id %></td>
+                <td><%= button_to t('button._false'), product_path(product, product: {in_menu: true}), controller: "products", action: "update", :method => :put, class: "btn btn-success" %></td>
+                <td><%= link_to product.title, product_path(product.id) %></td>
+                <td><%= product.position %></td>
+                <td><%= product.price %></td>
+                <td><%= product.created_at %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>

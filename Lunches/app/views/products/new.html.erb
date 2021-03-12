@@ -1,0 +1,59 @@
+<div class="container"><h2><%= t('product.new.header') %></h2>
+  <%= simple_form_for :product, url: products_path do |f| %>
+
+      <% if @product && @product.errors.any? %>
+        <p>
+          <ul>
+            <% @product.errors.full_messages.each do |msg| %>
+              <li class="alert alert-danger"><%= msg %></li>
+            <% end %>
+          </ul>
+        </p>
+      <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :title, label: t('product.new.title'), autofocus: true, error: 'Title is mandatory, please specify one' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :price, label: t('product.new.price') %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :description, label: t('product.new.description'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :position, as: :select, collection: [1,2,3], label: t('product.new.position') %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :in_menu, as: :select, collection: [true, false], label: t('product.new.in_menu') %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :remote_path_to_image_url, label: t('product.new.image_url') %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :path_to_image, as: :file, label: t('product.new.image') %>
+        <%= f.hidden_field :path_to_image_cache %>  <!-- Не работает, т.к. при неудаче создания, перекидывает на '/products' -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="actions">
+          <%= f.button :submit, t('product.new.button'), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

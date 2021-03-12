@@ -1,0 +1,49 @@
+<div class="container"><h2><%= t('organisation.edit.title') %></h2>
+  <%= simple_form_for :organisation, url: organisation_path(@organisation), method: :put do |f| %>
+
+      <% if @organisation && @organisation.errors.any? %>
+        <p>
+          <ul>
+            <% @organisation.errors.full_messages.each do |msg| %>
+              <li class="alert alert-danger"><%= msg %></li>
+            <% end %>
+          </ul>
+        </p>
+      <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :name, label: t('organisation.edit.name'), autofocus: true, error: 'Name is mandatory, please specify one' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :email, label: t('organisation.edit.email'), autocomplete: "email" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :description, label: t('organisation.edit.description'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="actions">
+          <%= f.button :submit, t('organisation.edit.button'), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= button_to t('organisation.edit.button_delete_org'), organisation_path(@organisation), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-lg btn-block" %>
+    </div>
+    <div class="col-md-4">
+      <%= button_to t('organisation.edit.back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+    </div>
+  </div>
+</div>

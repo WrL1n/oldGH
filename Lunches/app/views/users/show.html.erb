@@ -1,0 +1,83 @@
+<% if user_admin? %>
+
+  <div class="container">
+    <h2><%= t('users.show.title') %></h2>
+  	<%= simple_form_for @user do |f| %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :username, input_html: { disabled: "disabled" } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :email, input_html: { disabled: "disabled" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :first_name, input_html: { disabled: "disabled" } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :last_name, input_html: { disabled: "disabled" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <%= f.input :about, input_html: { disabled: "disabled" } %>
+        </div>
+      </div>
+  	<% end %>
+
+      <div class="row">
+        <div class="col-md-4">
+          <% if current_user.id == @user.id %>
+            <%= button_to t('edit.edit'), edit_user_registration_path, class: "btn btn-info btn-lg btn-block", method: :get %>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+          <%= button_to t('edit.back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+        </div>
+      </div>
+  </div>
+
+<% else %>
+
+  <% if current_user.id == @user.id %>
+    <div class="container">
+    <h2>User profile</h2>
+    <%= simple_form_for @user do |f| %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :username, input_html: { disabled: "disabled" } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :email, input_html: { disabled: "disabled" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :first_name, input_html: { disabled: "disabled" } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :last_name, input_html: { disabled: "disabled" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <%= f.input :about, input_html: { disabled: "disabled" } %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= button_to t('edit.edit'), edit_user_registration_path, class: "btn btn-info btn-lg btn-block", method: :get %>
+      </div>
+      <div class="col-md-4">
+        <%= button_to t('edit.back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+      </div>
+    </div>
+  </div>
+  <% else %>
+    <% redirect_to_root %>
+  <% end %>
+
+<% end %>

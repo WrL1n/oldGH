@@ -1,0 +1,73 @@
+<div class="container">
+  <h2><%= t('product.edit.header') %></h2>
+  <%= simple_form_for :product, url: product_path(@product), method: :put do |f| %>
+
+    <% if @product && @product.errors.any? %>
+      <p>
+        <ul>
+          <% @product.errors.full_messages.each do |msg| %>
+            <li class="alert alert-danger"><%= msg %></li>
+          <% end %>
+        </ul>
+      </p>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :title, label: t('product.edit.title'), autofocus: true, error: 'Title is mandatory, please specify one' %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :price, label: t('product.edit.price'), autocomplete: "off" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :description, label: t('product.edit.description'), autocomplete: "off" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :position, as: :select, collection: [1,2,3], label: t('product.new.position') %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :in_menu, as: :select, collection: [true, false], label: t('product.new.in_menu') %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :path_to_image, as: :file, label: t('product.edit.image') %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <% if @product.path_to_image? %>
+            <%= image_tag @product.path_to_image.thumb.url %>
+            <div>
+              <%= label_tag :remove_path_to_image do %>
+                Remove image
+                <%= f.check_box :remove_path_to_image %>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="actions">
+          <%= f.button :submit, t('product.edit.button'), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <br/>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= button_to t('product.edit.button_delete'), product_path(@product), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-lg btn-block" %>
+    </div>
+    <div class="col-md-4">
+      <%= button_to t('product.edit.button_back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+    </div>
+  </div>
+</div>

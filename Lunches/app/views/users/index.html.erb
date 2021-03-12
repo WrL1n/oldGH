@@ -1,0 +1,32 @@
+<div class="container">
+	<h2><%= t('users.index.title') %></h2>
+	<table class="table table-striped">
+
+		<thead>
+		  <tr>
+		  	<th><%= t('table.id') %></th>
+		    <th><%= t('table.username') %></th>
+		    <th><%= t('table.email') %></th>
+		    <th><%= t('table.name') %></th>
+		    <th><%= t('table.org_id') %></th>
+		    <th><%= t('table.created_at') %></th>
+		    <th><%= t('table.last_sign') %></th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <% @users.each do |user| %>
+		    <tr>
+		    	<td><%= user.id %></td>
+		      <td><%= link_to user.username, user_path(user.id) %></td>
+		      <td><%= user.email %></td>
+		      <td><%= full_name(user) %></td>
+		      <td><%= link_to user.organisation_id, organisation_path(user.organisation_id) %></td>
+		      <td><%= user.created_at %></td>
+		      <td><%= user.last_sign_in_at %></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+
+	</table>
+</div>

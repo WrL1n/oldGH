@@ -1,0 +1,157 @@
+<% if user_admin? %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2><%= t('day.show.date') %><%= @day.date %> <%= t('day.show.orders') %></h2>
+      </div>
+      <div class="col-md-4">
+        <h2><%= t('day.show.daily_total_price') %><%= daily_total_price(@day.date) %></h2>
+      </div>
+    </div>
+
+    <% @organisations.each do |organisation| %>
+      <%= link_to organisation.name, organisation_path(organisation.id) %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t('table.id') %></th>
+            <th><%= t('table.user') %></th>
+            <th><%= t('table.price') %></th>
+            <th><%= t('table.first_pos') %></th>
+            <th><%= t('table.second_pos') %></th>
+            <th><%= t('table.third_pos') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% organisation.users.each do |user| %>
+            <% user_order(user, @day.date).each do |order| %>
+              <tr>
+                <td><%= order.id %></td>
+                <td><%= link_to show_username(order.user_id), user_path(order.user_id) %></td>
+                <td><%= order.price %></td>
+                <% if full_order?(order) %>
+                  <% products_in_order(order).each do |product| %>
+                    <td><%= link_to product.title, product_path(product.id) %></td>
+                  <% end %>
+                <% else %>
+                  <td><%= link_to product_in_order(order.first_pos), product_path(order.first_pos.to_i) %></td>
+                  <td><%= link_to product_in_order(order.second_pos), product_path(order.second_pos.to_i) %></td>
+                  <td><%= link_to product_in_order(order.third_pos), product_path(order.third_pos.to_i) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-md-8">
+          <u><h5><%= t('day.show.daily_total_price_for_org') %><%= daily_total_price_for_organisation(@day.date, organisation) %></h5></u>
+        </div>
+      </div>
+      <br/>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= button_to t('day.show.button_back'),:back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <% if order_does_not_exists?(current_user.id, @day.date) %>
+
+    <div class="container">
+      <h4 class="text-success"><%= t('day.show.today_on_menu') %></h4>
+      <% if !@menu.products.empty? %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th><%= t('table.image') %></th>
+              <th><%= t('table.title') %></th>
+              <th><%= t('table.position') %></th>
+              <th><%= t('table.description') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @menu.products.order(position: :asc).each do |product| %>
+              <% if product.in_menu == true %>
+                <tr>
+                  <td><%= image_tag(product.path_to_image.small_thumb.url, alt: 'Image', class: "rounded") if product.path_to_image? %></td>
+                  <td><%= product.title %></td>
+                  <td><%= product.position %></td>
+                  <td><%= product.description %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+
+      <h2><%= t('day.show.date') %><%= @day.date %> <%= t('day.show.create_order') %>:</h2>
+      <%= simple_form_for :order, url: orders_path do |f| %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.input :first_pos, as: :select, collection: products_in_menu_with_position(1), label: t('day.show.pos_1') %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :second_pos, as: :select, collection: products_in_menu_with_position(2), label: t('day.show.pos_2') %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :third_pos, as: :select, collection: products_in_menu_with_position(3), label: t('day.show.pos_3') %>
+          </div>
+        </div>
+        <%= f.input :day_date, :as => :hidden, input_html: { value: @day.date } %>
+        <%= f.input :user_id, :as => :hidden, input_html: { value: current_user.id } %>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <div class="actions">
+              <%= f.button :submit, t('day.show.create_order'), class: "btn btn-success btn-lg btn-block" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <%= button_to t('day.show.button_back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      <% end %>
+    </div>
+    <br/>
+
+  <% else %>
+
+    <div class="container">
+      <h2><%= t('day.show.you_order') %></h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= t('table.image') %></th>
+            <th><%= t('table.title') %></th>
+            <th><%= t('table.position') %></th>
+            <th><%= t('table.description') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products_in_order(@order).each do |product| %>
+            <tr>
+              <td><%= image_tag(product.path_to_image.small_thumb.url, alt: 'Image', class: "rounded") if product.path_to_image? %></td>
+              <td><%= product.title %></td>
+              <td><%= product.position %></td>
+              <td><%= product.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div class="col-md-4">
+          <%= button_to t('day.show.button_back'),:back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>

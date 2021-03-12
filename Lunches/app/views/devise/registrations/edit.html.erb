@@ -1,0 +1,76 @@
+<div class="container"><h2><%= t('edit.edit') %><%= resource_name.to_s.humanize %></h2></div>
+
+<div class="container">
+  <%= simple_form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
+    <div class="container">
+      <% if devise_error_messages! && devise_error_messages!.length > 0 then %>
+        <div class="alert alert-danger"><%= devise_error_messages! %></div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :username, label: t('edit.username'), autofocus: true, error: 'Username is mandatory, please specify one' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :email, label: t('edit.email'), autocomplete: "email" %>
+      </div>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :password, error_html: { id: 'password_error'}, label: t('edit.password'), placeholder: t("edit.password_des"), hint: t('edit.chars_min'), autocomplete: "off" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :password_confirmation, label: t('edit.password_conf'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+      <%= f.input :first_name, label: t('edit.first_name'), autocomplete: "off" %>
+      </div>
+
+      <div class="col-md-4">
+      <%= f.input :last_name, label: t('edit.last_name'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+      <%= f.input :about, label: t('edit.about'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :current_password, label: t('edit.current_password'), hint: t("edit.current_password_des"), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="actions">
+          <%= f.button :submit, t('edit.button'), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md-4">
+      <%= button_to t('edit.button_cancel_acc'), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger btn-lg btn-block" %>
+    </div>
+    <div class="col-md-4">
+      <%= button_to t('edit.back'), :back, class: "btn btn-secondary btn-lg btn-block", method: :get %>
+    </div>
+  </div>
+</div>

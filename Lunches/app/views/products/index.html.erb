@@ -1,0 +1,35 @@
+<div class="container">
+  <h2><%= t('product.index.header') %></h2>
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th><%= t('table.id') %></th>
+        <th><%= t('table.in_menu?') %></th>
+        <th><%= t('table.title') %></th>
+        <th><%= t('table.position') %></th>
+        <th><%= t('table.price') %></th>
+        <th><%= t('table.created_at') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.order(position: :asc).each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.in_menu %></td>
+          <td><%= link_to product.title, product_path(product.id) %></td>
+          <td><%= product.position %></td>
+          <td><%= product.price %></td>
+          <td><%= product.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+  <div class="row">
+    <div class="col-md-4">
+      <%= button_to t('product.index.button'), new_product_path, class: "btn btn-info btn-lg btn-block", method: :get %>
+    </div>
+  </div>
+</div>

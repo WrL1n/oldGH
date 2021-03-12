@@ -1,0 +1,38 @@
+<div class="container"><h2><%= t('organisation.new.title') %></h2>
+  <%= simple_form_for :organisation, url: organisations_path do |f| %>
+
+      <% if @organisation && @organisation.errors.any? %>
+        <p>
+          <ul>
+            <% @organisation.errors.full_messages.each do |msg| %>
+              <li class="alert alert-danger"><%= msg %></li>
+            <% end %>
+          </ul>
+        </p>
+      <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :name, label: t('organisation.new.name'), autofocus: true, error: 'Name is mandatory, please specify one' %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.input :email, label: t('organisation.new.email'), placeholder: 'organisation@domain.com', autocomplete: "email" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :description, label: t('organisation.new.description'), autocomplete: "off" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="actions">
+          <%= f.button :submit, t('organisation.new.button'), class: "btn btn-success btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

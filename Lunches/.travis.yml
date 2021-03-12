@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 2.5.1
+notifications:
+  - email: false
+branches:
+  only:
+  - master
+script:
+  - bundle exec rake db:setup RAILS_ENV=test
+  - bundle exec rspec

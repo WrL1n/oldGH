@@ -1,0 +1,31 @@
+<div class="container">
+  <h2><%= t('organisation.index.title') %></h2>
+  <table class="table table-striped">
+
+    <thead>
+      <tr>
+        <th><%= t('table.id') %></th>
+        <th><%= t('table.name') %></th>
+        <th><%= t('table.email') %></th>
+        <th><%= t('table.created_at') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @organisations.each do |organisation| %>
+        <tr>
+          <td><%= organisation.id %></td>
+          <td><%= link_to organisation.name, organisation_path(organisation.id) %></td>
+          <td><%= organisation.email %></td>
+          <td><%= organisation.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+  <div class="row">
+    <div class="col-md-4">
+      <%= button_to t('organisation.index.button'), new_organisation_path, method: :get, class: "btn btn-info btn-lg btn-block" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container">
+  <h2><%= t('home.hello') %></h2>
+
+  <%= month_calendar attribute: :date do |date| %>
+    <% if on_weekday?(date) %>
+      <%= date %>
+    <% else %>
+      <%= link_to date, "days/#{date}" %>
+    <% end %>
+  <% end %>
+</div>
