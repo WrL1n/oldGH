@@ -1,0 +1,12 @@
+<h2> Add new post</h2>
+
+<form action="/new" method="POST">
+  <input type="text" name="post[post_author]" class="form-control" placeholder="Type you name here" required="true">
+  <hr>
+  <input type="text" name="post[post_topic]" class="form-control" placeholder="Type you name topic here" required="true">
+  <hr>  
+  <textarea name="post[post_text]" class="form-control" rows="6" placeholder="Type post text here" required="true"></textarea>
+  <br>
+  <button type="submit" class="btn btn-success">Submit</button>
+
+</form>

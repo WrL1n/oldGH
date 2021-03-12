@@ -1,0 +1,13 @@
+<h2> All Posts: </h2>
+
+<% @all_posts.each do |post|%>
+	<p>
+		<a href="/post/<%= post.id %> "> <%= post.post_topic %> </a>
+		<br>
+		<span style = "font-size: 75%; color: #999" >		
+		Author: <%= post.post_author %>
+		<br>
+		Added at: <%= post.created_at %>
+		</span>
+	</p>
+<% end %>

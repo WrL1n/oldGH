@@ -1,0 +1,22 @@
+Структура массива игроков:
+
+	Players - array:
+		player - hash: { 
+			name: String,
+			turn: Boolean,
+			turn_qt: Integer,
+			mercenaries: Array: 
+				[object_class_Mercenaries(0), ... , object_class_Mercenaries(8)]
+				 object_class_Mercenaries имеет методы класса:
+				 	type_weapon - String
+				 	type - String
+				 	hp - Integer
+				 	damage - Integer
+				 	armor - Integer
+				 	iniative - Integer
+				 	available_iniative - Integer
+				 	stun - Boolean
+				 	stun_qt - Boolean
+				 	freeze - Boolean
+				 	turn - Boolean
+		}
