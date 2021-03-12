@@ -1,0 +1,32 @@
+<h2> Welcome to Pizza Shop!</h2>
+
+<div class="row">
+	<% @products.each do |item| %>
+		<div class="col-md-3">
+			<div align="center">
+				<%= item.title %>
+			</div>
+
+			<div align="center" >
+				<img src="<%= item.path_to_image %>" class="img-thumbnail">
+			</div>	
+
+			<div align="center">
+				<%= item.description %>
+			</div>
+
+			<div align="center">
+				Size: <%= item.size %> cm
+			</div>
+
+			<div align="center">
+				Price: <strong><%= item.price %> rub</strong>
+			</div>	
+
+			<div>
+				<button  type="button" class="btn btn-success btn-sm btn-block" onclick="add_to_cart(<%= item.id %>)">Add to cart</button>	
+				<button  type="button" class="btn btn-danger btn-sm btn-block" onclick="remove_from_cart(<%= item.id %>)">Remove</button>		
+			</div>
+		</div>		
+	<% end%>
+</div>

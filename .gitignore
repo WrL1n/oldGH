@@ -23,8 +23,8 @@ Lunches/db/*.sqlite3-journal
 # Ignore all logfiles and tempfiles.
 Lunches/log/*
 Lunches/tmp/*
-Lunches!/log/.keep
-Lunches!/tmp/.keep
+Lunches/!/log/.keep
+Lunches/!/tmp/.keep
 
 # Ignore uploaded files in development
 Lunches/storage/*
@@ -43,3 +43,25 @@ Lunches/.rubocop_todo.yml
 Lunches/public/uploads
 # ---------------------------------------------------------
 
+PizzaShop/pizzashop.db
+
+# poly-demo
+# ---------------------------------------------------------
+# Ignore bundler config.
+poly-demo/.bundle
+
+# Ignore the default SQLite database.
+poly-demo/db/*.sqlite3
+poly-demo/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+poly-demo/log/*
+poly-demo/tmp/*
+poly-demo/!/log/.keep
+poly-demo/!/tmp/.keep
+
+poly-demo/node_modules
+poly-demo/yarn-error.log
+
+poly-demo/.byebug_history
+# ---------------------------------------------------------
