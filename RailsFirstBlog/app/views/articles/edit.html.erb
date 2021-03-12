@@ -1,0 +1,25 @@
+<div class="container"><h2><%= t('article.edit.article_edit') %></h2></div>
+
+<div class="container">
+	<%= bootstrap_form_for :article, url: article_path(@article), method: :put do |f| %>
+		<% if @article && @article.errors.any? %>
+			<p>
+				<ul>
+					<% @article.errors.full_messages.each do |msg| %>
+						<li class="alert alert-danger"><%= msg %></li>
+					<% end %>
+				</ul>
+		  </p>
+
+	  <% end %>
+
+			<%# f.label t('article.edit.title') %>
+			<%= f.text_field :title %>
+
+			<%# f.label t('article.edit.text') %>
+			<%= f.text_area :text %>
+
+			<%= f.submit t('article.edit.button'), class: "btn btn-primary" %>
+	<% end %>
+
+</div>

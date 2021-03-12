@@ -1,0 +1,42 @@
+<% @articles.each do |article| %>
+
+	<div class="container">
+			<h2 class="subheading">
+				<a href="<%= article_path(article) %>"> <%= article.title %> </a>
+			</h2>
+
+			<p id="p1">
+				<%= article.text %>
+			</p>
+
+			<span class="label label-default">
+				<%= @user.find(id = article.user_id).username %>
+			</span>
+
+			<span style = "font-size: 75%; color: #999" >		
+				<%= article.created_at %>
+			</span>
+			
+	</div>	<!-- /.container -->
+
+	<div class="container">
+
+			<div class="btn-group btn-group-justified" role="group">
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default"><%= link_to t('article_button.article_show'), article_path(article) %></button>
+			  </div>
+
+			  <% if user_signed_in? && current_user.id == article.user_id %>
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-default"><%= link_to t('article_button.article_edit'), edit_article_path(article) %></button>
+				  </div>
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-default"><%= link_to t('article_button.article_destroy'), article_path(article), method: :delete, data: {confirm: 'Are you sure?'} %></button>
+				  </div>
+			  <% end %>
+			  
+			</div>	
+	</div>	<!-- /.container -->
+
+	<hr />
+<% end %>

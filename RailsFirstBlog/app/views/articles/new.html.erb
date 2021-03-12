@@ -1,0 +1,27 @@
+<div class="container"><h2><%= t('article.new.article_new') %></h2></div>
+
+<div class="container">
+	<%= bootstrap_form_for :article, url: articles_path do |f| %>
+		<% if @article && @article.errors.any? %>
+			<p>
+				<ul>
+					<% @article.errors.full_messages.each do |msg| %>
+						<li class="alert alert-danger"><%= msg %></li>
+					<% end %>
+				</ul>
+		  </p>
+		
+	  <% end %>
+	  
+	  <%= f.hidden_field :user_id, value: "#{current_user.id}" %>
+
+			<%# f.label t('article.new.title') %>
+			<%= f.text_field :title %>
+
+			<%# f.label t('article.new.text') %>
+			<%= f.text_area :text %>
+
+			<%= f.submit t('article.new.button'), class: "btn btn-primary" %>
+	<% end %>
+	
+</div>

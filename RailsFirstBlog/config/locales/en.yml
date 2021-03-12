@@ -1,0 +1,101 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  contacts:
+    contact_us: "Contact Us!"
+    thanks: "Thanks!"
+    email: "Email"
+    message: "Message"
+    button: "Send Message"
+
+  about_us: "About us"  
+
+  terms:
+    terms_of_service: "Terms of Service"
+    content: "Please do not use this blog"
+
+  article_button:
+    article_show: "Show"
+    article_edit: "Edit"
+    article_destroy: "Destroy"
+
+  article:
+    new:
+      article_new: "New article"
+      title: "Title"
+      text: "Text"
+      button: "Create article"
+    edit:
+      article_edit: "Edit article"
+      title: "Title"
+      text: "Text"
+      button: "Save article"
+    show:
+      body: "Body"
+      button: "Add comment"
+
+  header:
+    article: "Article"
+    article_new: "New Article"
+    about: "About us"
+    contact: "Contact"
+    terms: "Terms"
+    sign_in: "Sign in"
+    sign_out: "Sign Out"
+
+  sessions:
+    log_in: "Log in"
+    email: "Email"
+    password: "Password"
+    remember_me: "Remember me"
+    button: "Log in"
+
+  registrations:
+    sign_up: "Sign up"
+    email: "Email"
+    username: "Username"
+    password: "Password"
+    chars_min: " characters minimum"
+    password_conf: "Password confirmation"
+    button: "Sign up"
+
+  devise:
+    shared:
+      links:
+        log_in: "Log in"     
+        sign_up: "Sign up"
+        forgot_password: "Forgot your password?"
+
+  page_404:
+    page_not_found: "Page not found"
+    details: "The page is deprecated, deleted, or does not exist at all"
+    button: "Home"

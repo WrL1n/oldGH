@@ -65,3 +65,26 @@ poly-demo/yarn-error.log
 
 poly-demo/.byebug_history
 # ---------------------------------------------------------
+
+# RailsFirstBlog
+# ---------------------------------------------------------
+# Ignore bundler config.
+RailsFirstBlog/.bundle
+
+# Ignore the default SQLite database.
+RailsFirstBlog/db/*.sqlite3
+RailsFirstBlog/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+RailsFirstBlog/log/*
+RailsFirstBlog/tmp/*
+RailsFirstBlog/!/log/.keep
+RailsFirstBlog/!/tmp/.keep
+
+RailsFirstBlog/node_modules
+RailsFirstBlog/yarn-error.log
+
+RailsFirstBlog/.byebug_history
+
+RailsFirstBlog/.rubocop_todo.yml
+# ---------------------------------------------------------

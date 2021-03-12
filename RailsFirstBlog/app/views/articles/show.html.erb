@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="row">
+		<h1 class="subheading"><%= @article.title %></h1>
+	</div><!-- /.row -->
+
+	<div class="row">
+		<p id="p1">
+			<%= @article.text %>
+		</p>
+	</div><!-- /.row -->
+
+	<hr>
+
+</div> <!-- /.container -->
+
+<div class="container">
+	<% @article.comments.each do |comment| %>
+		<div class="row">
+			<p>		
+		
+				<span style = "background-color: #E6E6FA">	
+					<%= comment.body %>
+				</span>	
+				<br>
+				
+				<span class="label label-default">
+					<u><i><%= comment.author %></u>
+				</span>
+
+				<span style = "font-size: 75%; color: #999">		
+					<%= comment.created_at %></i>
+				</span>
+				<br>
+				
+			</p>
+		</div>	<!-- /.row -->
+	<% end %>	
+	
+	<% if user_signed_in? %>
+		<div class="row">	
+			<p>
+				<%= bootstrap_form_for ([@article,@article.comments.build]) do |f| %>
+					
+						<%# f.label t('article.show.body') %>
+						<%= f.text_area :body %>
+
+						<%= f.submit t('article.show.button'), class: "btn btn-primary" %>
+
+				<% end %>
+			</p>
+		</div>	<!-- /.row -->
+	<% end %>
+
+</div>	<!-- /.container -->
